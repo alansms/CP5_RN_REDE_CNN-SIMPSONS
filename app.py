@@ -2,10 +2,17 @@ import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
+import gdown
 import os
 
+# ID do arquivo do modelo no Google Drive
+file_id = '1jJ77L4X6YGlLfFYgvaOWxSBHeWqrcOJ7'  # Substitua pelo seu FILE_ID
+model_path = 'modelo_personagens.h5'  # Nome do arquivo que será salvo
+
+# Baixar o modelo do Google Drive
+gdown.download(f'https://drive.google.com/uc?id={file_id}', model_path, quiet=False)
+
 # Carregar o modelo treinado
-model_path = 'http://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/modelo_personagens.h5'  # Ajuste para o caminho correto
 model = load_model(model_path)
 
 # Função para prever o personagem usando Pillow
@@ -19,11 +26,11 @@ def predict_character(image_path):
 
 # Mapeando os personagens
 characters = {
-    'Homer': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Homer.jpg',
-    'Marge': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Margie.jpg',
-    'Bart': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Bart.jpg',
-    'Lisa': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Lisa.jpg',
-    'Maggie': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Maggie.jpg'
+    'Homer': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Homer.jpg',
+    'Marge': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Margie.jpg',
+    'Bart': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Bart.jpg',
+    'Lisa': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Lisa.jpg',
+    'Maggie': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Maggie.jpg'
 }
 
 # Configuração da interface
