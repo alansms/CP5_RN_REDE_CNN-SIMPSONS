@@ -33,11 +33,11 @@ def predict_character(image):
 
 # Mapeando os personagens
 characters = {
-    'Homer': 'Homer.png',
-    'Marge': 'Marge.png',
-    'Bart': 'Bart.png',
-    'Lisa': 'Lisa.png',
-    'Maggie': 'Maggie.png'
+    'Homer': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Homer.png',
+    'Marge': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Marge.png',
+    'Bart': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Bart.png',
+    'Lisa': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Lisa.png',
+    'Maggie': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Maggie.png'
 }
 
 # Configuração da interface
