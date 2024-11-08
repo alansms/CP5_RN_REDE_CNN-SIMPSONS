@@ -2,14 +2,21 @@ import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
-import gdown
+import requests
 
 # ID do arquivo do modelo no Google Drive
-file_id = '1jJ77L4X6YGlLfFYgvaOWxSBHeWqrcOJ7'  # Substitua pelo seu FILE_ID
+file_id = '1jJ77L4X6YGlLfFYgvaOWxSBHeWqrcOJ7'
 model_path = 'modelo_personagens.h5'  # Nome do arquivo que será salvo
 
+# Função para baixar o modelo
+def download_model(file_id, model_path):
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(url)
+    with open(model_path, 'wb') as f:
+        f.write(response.content)
+
 # Baixar o modelo do Google Drive
-gdown.download(f'https://drive.google.com/uc?id={file_id}', model_path, quiet=False)
+download_model(file_id, model_path)
 
 # Carregar o modelo treinado
 model = load_model(model_path)
