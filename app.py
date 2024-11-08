@@ -73,10 +73,12 @@ function fireConfetti() {
 # Exibir imagens dos personagens em uma grade
 cols = st.columns(3)  # Três colunas para exibir as imagens
 
-for name, image_file in characters.items():
+for i, (name, image_file) in enumerate(characters.items()):
     img = Image.open(requests.get(image_file, stream=True).raw)  # Abre a imagem com Pillow a partir da URL
 
-    with cols:  # Distribuir as imagens nas colunas
+    # Distribuir as imagens nas colunas
+    col = cols[i % 3]  # Obter a coluna correspondente
+    with col:  # Usar o contexto da coluna
         st.image(img, caption=name, use_column_width=True)  # Exibe a imagem
 
         if st.button(f'Selecionar {name}', key=name):  # Botão para selecionar o personagem
