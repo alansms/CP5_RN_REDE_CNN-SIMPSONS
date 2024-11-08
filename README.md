@@ -51,6 +51,11 @@ O modelo é baseado em uma rede neural convolucional (CNN) construída com o Ker
 
 Código do Projeto
 
+### Código do Projeto
+
+Aqui estão os principais trechos do código comentados:
+
+```python
 # Instalação das bibliotecas necessárias
 # Aqui, estou instalando as bibliotecas que preciso para o projeto
 !pip install streamlit opencv-python tensorflow numpy
