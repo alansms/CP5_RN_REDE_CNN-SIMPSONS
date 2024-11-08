@@ -52,6 +52,7 @@ O modelo é baseado em uma rede neural convolucional (CNN) construída com o Ker
 Código do Projeto
 
 # Instalação das bibliotecas necessárias
+# Aqui, estou instalando as bibliotecas que preciso para o projeto
 !pip install streamlit opencv-python tensorflow numpy
 
 # Importação das bibliotecas
@@ -61,6 +62,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Carregando o modelo treinado
+# Estou carregando o modelo que treinei anteriormente
 model = load_model('/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Treino_modelo/modelo_personagens.h5')  # Ajuste o caminho conforme necessário
 
 # Função para prever o personagem
@@ -98,7 +100,7 @@ if uploaded_file is not None:
     # Exibir o resultado
     st.write(f"O modelo previu: {character_names[prediction]}")
 
-    # Previsão do modelo com a seleção do usuário
+    # Comparo a previsão do modelo com a seleção do usuário
     if character_names[prediction] == selected_character:
         st.success("Você acertou!")
     else:
