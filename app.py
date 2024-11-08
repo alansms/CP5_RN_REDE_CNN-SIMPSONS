@@ -5,7 +5,7 @@ from PIL import Image
 import os
 
 # Carregar o modelo treinado
-model_path = 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/modelo_personagens.h5'  # Ajuste para o caminho correto
+model_path = 'http://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/modelo_personagens.h5'  # Ajuste para o caminho correto
 model = load_model(model_path)
 
 # Função para prever o personagem usando Pillow
