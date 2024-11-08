@@ -19,11 +19,11 @@ def predict_character(image_path):
 
 # Mapeando os personagens
 characters = {
-    'Homer': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Homer.jpg',
-    'Marge': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Margie.jpg',
-    'Bart': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Bart.jpg',
-    'Lisa': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Lisa.jpg',
-    'Maggie': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Maggie.jpg'
+    'Homer': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Homer.jpg',
+    'Marge': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Margie.jpg',
+    'Bart': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Bart.jpg',
+    'Lisa': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Lisa.jpg',
+    'Maggie': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Maggie.jpg'
 }
 
 # Configuração da interface
