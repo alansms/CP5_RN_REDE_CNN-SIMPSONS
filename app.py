@@ -23,11 +23,11 @@ def predict_character(image):
 
 # Mapeando os personagens
 characters = {
-    'Homer': 'personagens/Homer.png',
-    'Marge': 'personagens/Marge.png',
-    'Bart': 'personagens/Bart.png',
-    'Lisa': 'personagens/Lisa.png',
-    'Maggie': 'personagens/Maggie.png'
+    'Homer': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Homer.png',
+    'Marge': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/MArge.png',
+    'Bart': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Homer.png',
+    'Lisa': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Lisa.png',
+    'Maggie': 'https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS/blob/main/Maggie.png'
 }
 
 # Inicializando o contador de acertos na sessão
