@@ -14,27 +14,28 @@ gdown.download(f'https://drive.google.com/uc?id={file_id}', model_path, quiet=Fa
 # Carregar o modelo treinado
 model = load_model(model_path)
 
-# Função para prever o personagem usando Pillow
-def predict_character(image_path):
-    img = Image.open(image_path)  # Abre a imagem com Pillow
-    img = img.resize((64, 64))  # Redimensiona para o tamanho esperado
-    img_array = np.array(img) / 255.0  # Normaliza
-    img_array = np.expand_dims(img_array, axis=0)  # Adiciona dimensão
-    prediction = model.predict(img_array)
+# Função para prever o personagem
+def predict_character(image):
+    img = cv2.resize(image, (64, 64))  # Redimensiona para o tamanho esperado
+    img = np.expand_dims(img, axis=0) / 255.0  # Normaliza e adiciona dimensão
+    prediction = model.predict(img)
     return np.argmax(prediction)
 
 # Mapeando os personagens
 characters = {
-    'Homer': 'Homer.jpg',
-    'Marge': 'Margie.jpg',
-    'Bart': 'Bart.jpg',
-    'Lisa': 'Lisa.jpg',
-    'Maggie': 'Maggie.jpg'
+    'Homer': 'personagens/Homer.png',
+    'Marge': 'personagens/Marge.png',
+    'Bart': 'personagens/Bart.png',
+    'Lisa': 'personagens/Lisa.png',
+    'Maggie': 'personagens/Maggie.png'
 }
 
+# Inicializando o contador de acertos na sessão
+if 'correct_counts' not in st.session_state:
+    st.session_state.correct_counts = {name: 0 for name in characters.keys()}
+
 # Configuração da interface
-st.title("Jogo da Memória - Classificador de Personagens")
-st.markdown("<style>h1 {font-family: 'Comic Sans MS'; color: #FFCC00;}</style>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #FFCC00; font-family: Comic Sans MS;'>CLASSIFICADOR DE PERSONAGENS</h1>", unsafe_allow_html=True)
 
 # Adicionar script do confete
 st.markdown("""
@@ -55,11 +56,22 @@ function fireConfetti() {
     fire(0.35, { spread: 100, decay: 0.91, scalar: 1 });
     fire(0.1, { spread: 120, decay: 0.92, scalar: 1.2 });
 }
-</script>
-""", unsafe_allow_html=True)
 
-# Caixa de seleção para escolher qual personagem analisar
-selected_character = st.selectbox("Selecione um personagem para análise:", list(characters.keys()))
+function addClickEffect(elementId) {
+    var element = document.getElementById(elementId);
+    element.classList.add("clicked");
+    setTimeout(() => {
+        element.classList.remove("clicked");
+    }, 300);
+}
+</script>
+<style>
+.clicked {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Exibir imagens dos personagens em uma grade
 cols = st.columns(3)  # Três colunas para exibir as imagens
@@ -68,14 +80,26 @@ for i, (name, image_file) in enumerate(characters.items()):
     img = Image.open(image_file)  # Abre a imagem com Pillow
 
     with cols[i % 3]:  # Distribuir as imagens nas colunas
-        st.image(img, caption=name, use_column_width=True)
-        if st.button(f'Selecionar {name}'):
-            # Prever o personagem
-            predicted_class = predict_character(image_file)  # Chama a função com o caminho da imagem
+        st.image(img, caption=name, use_column_width=True)  # Exibe a imagem
 
-            if selected_character.lower() == name.lower():
+        # Cria um botão que ativa o efeito de clique ao clicar na imagem
+        if st.button(f'Selecionar {name}'):  # Botão para selecionar o personagem
+            # Chamar função de efeito de clique
+            st.markdown(f'<script>addClickEffect("{name}");</script>', unsafe_allow_html=True)
+
+            # Prever o personagem
+            selected_image = cv2.imread(image_file)  # Lê a imagem correspondente
+            predicted_class = predict_character(selected_image)
+
+            if predicted_class == i:  # Compara a classe prevista com o índice do personagem
                 st.success("Você acertou!", icon="✅")
-                # Chamar função de confete
+                st.session_state.correct_counts[name] += 1  # Incrementa a contagem de acertos
+                # Chamar função de confete usando o método adequado
                 st.markdown('<script>fireConfetti();</script>', unsafe_allow_html=True)
             else:
                 st.error("Tente novamente!", icon="❌")
+
+# Exibir contadores de acertos na lateral direita
+st.sidebar.header("Contagem de Acertos")
+for name, count in st.session_state.correct_counts.items():
+    st.sidebar.write(f"{name}: {count} vez(es)")
