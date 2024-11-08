@@ -1,5 +1,4 @@
 import streamlit as st
-import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
@@ -9,14 +8,14 @@ import os
 model_path = '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Treino_modelo/modelo_personagens.h5'  # Ajuste para o caminho correto
 model = load_model(model_path)
 
-
-# Função para prever o personagem
-def predict_character(image):
-    img = cv2.resize(image, (64, 64))  # Redimensiona para o tamanho esperado
-    img = np.expand_dims(img, axis=0) / 255.0  # Normaliza e adiciona dimensão
-    prediction = model.predict(img)
+# Função para prever o personagem usando Pillow
+def predict_character(image_path):
+    img = Image.open(image_path)  # Abre a imagem com Pillow
+    img = img.resize((64, 64))  # Redimensiona para o tamanho esperado
+    img_array = np.array(img) / 255.0  # Normaliza
+    img_array = np.expand_dims(img_array, axis=0)  # Adiciona dimensão
+    prediction = model.predict(img_array)
     return np.argmax(prediction)
-
 
 # Mapeando os personagens
 characters = {
@@ -60,14 +59,13 @@ selected_character = st.selectbox("Selecione um personagem para análise:", list
 cols = st.columns(3)  # Três colunas para exibir as imagens
 
 for i, (name, image_file) in enumerate(characters.items()):
-    img = Image.open(image_file)  # Ajuste o caminho das imagens
+    img = Image.open(image_file)  # Abre a imagem com Pillow
 
     with cols[i % 3]:  # Distribuir as imagens nas colunas
         st.image(img, caption=name, use_column_width=True)
         if st.button(f'Selecionar {name}'):
             # Prever o personagem
-            selected_image = cv2.imread(image_file)  # Lê a imagem correspondente
-            predicted_class = predict_character(selected_image)
+            predicted_class = predict_character(image_file)  # Chama a função com o caminho da imagem
 
             if selected_character.lower() == name.lower():
                 st.success("Você acertou!", icon="✅")
