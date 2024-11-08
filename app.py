@@ -48,36 +48,16 @@ if 'correct_counts' not in st.session_state:
 # Configuração da interface
 st.markdown("<h1 style='text-align: center; color: #FFCC00; font-family: Comic Sans MS;'>CLASSIFICADOR DE PERSONAGENS</h1>", unsafe_allow_html=True)
 
-# Adicionar script do confete
-st.markdown("""
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-<script>
-function fireConfetti() {
-    var count = 200; // Quantidade de confetes
-    var defaults = {
-        origin: { y: 0.7 } // Origem do confete
-    };
-
-    function fire(particleRatio, opts) {
-        confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) }));
-    }
-
-    fire(0.25, { spread: 26, startVelocity: 55 });
-    fire(0.2, { spread: 60 });
-    fire(0.35, { spread: 100, decay: 0.91, scalar: 1 });
-    fire(0.1, { spread: 120, decay: 0.92, scalar: 1.2 });
-}
-</script>
-""", unsafe_allow_html=True)
+# Caixa de seleção para escolher qual personagem analisar
+selected_character = st.selectbox("Selecione um personagem para análise:", list(characters.keys()))
 
 # Exibir imagens dos personagens em uma grade
 cols = st.columns(3)  # Três colunas para exibir as imagens
 
-# Loop para exibir imagens
 for i, (name, image_file) in enumerate(characters.items()):
     img = Image.open(requests.get(image_file, stream=True).raw)  # Abre a imagem com Pillow
 
-    with cols[i % 3]:  # Usar o contexto da coluna
+    with cols[i % 3]:  # Distribuir as imagens nas colunas
         st.image(img, caption=name, use_column_width=True)  # Exibe a imagem
 
         # Cria um botão que ativa o efeito de clique ao clicar na imagem
@@ -85,7 +65,7 @@ for i, (name, image_file) in enumerate(characters.items()):
             # Prever o personagem
             predicted_class = predict_character(img)  # Chama a função com a imagem
 
-            if predicted_class == list(characters.keys()).index(name):  # Verifica se a previsão está correta
+            if selected_character.lower() == name.lower():  # Verifica se a previsão está correta
                 st.success("Você acertou!", icon="✅")
                 st.session_state.correct_counts[name] += 1  # Incrementa a contagem de acertos
                 st.markdown('<script>fireConfetti();</script>', unsafe_allow_html=True)
