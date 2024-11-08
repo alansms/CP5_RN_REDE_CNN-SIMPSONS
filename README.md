@@ -14,7 +14,7 @@ Este projeto utiliza redes neurais convolucionais (CNN) para a classificação d
 
 - **Painel de Contagem de Acertos:** A aplicação conta e exibe quantas vezes cada personagem foi corretamente identificado, permitindo aos usuários acompanhar seu desempenho.
 
-- **Implementação Online:** O projeto foi desenvolvido para ser executado online, permitindo que os usuários acessem e utilizem a aplicação sem necessidade de instalação. Você pode testá-lo diretamente no seguinte link: **[Teste Online](https://cp5rnredecnn-simpsons-fc23pczypcqkf3tcmnmsdb.streamlit.app/)**.
+- **Implementação Online:** O projeto foi desenvolvido para ser executado online, permitindo que os usuários acessem e utilizem a aplicação sem necessidade de instalação. Você pode testá-lo diretamente no seguinte link: ***[Teste Online](https://cp5rnredecnn-simpsons-fc23pczypcqkf3tcmnmsdb.streamlit.app/)***.
 
 ### Pré-requisitos
 
@@ -49,11 +49,7 @@ O modelo é baseado em uma rede neural convolucional (CNN) construída com o Ker
 	5.	Avaliação: O modelo é avaliado no conjunto de teste para medir sua precisão.
 	6.	Predição e Visualização: Após o treinamento, o modelo faz previsões sobre novas imagens e exibe a imagem do personagem identificado, destacando-o com um retângulo ao redor.
 
-Código do Projeto
-
 ### Código do Projeto
-
-Aqui estão os principais trechos do código comentados:
 
 ```python
 # Instalação das bibliotecas necessárias
