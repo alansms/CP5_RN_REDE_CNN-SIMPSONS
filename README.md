@@ -1,4 +1,4 @@
-# Classificação de Imagens: Homer vs Bart usando Redes Neurais Convolucionais (CNN)
+### Classificação de Imagens: Homer vs Bart usando Redes Neurais Convolucionais (CNN)
 
 Este projeto utiliza redes neurais convolucionais (CNN) para a classificação de imagens dos personagens Homer e Bart do desenho animado *Os Simpsons*. O objetivo é treinar um modelo capaz de identificar corretamente os personagens em imagens e marcar o local onde eles são encontrados com um retângulo ao redor.
 
@@ -24,7 +24,7 @@ Certifique-se de que as seguintes bibliotecas estão instaladas. Para facilitar 
 
 Clone o repositório do projeto para o seu ambiente local:
 ```bash
-git clone <URL_do_Repositorio>
+git clone https://github.com/alansms/CP5_RN_REDE_CNN-SIMPSONS
 
 Navegue até o diretório do projeto:
 cd Homer_vs_Bart_CNN
@@ -105,13 +105,13 @@ if uploaded_file is not None:
     if character_names[prediction] == selected_character:
         st.success("Você acertou!")
     else:
-        st.error("Tente novamente!")
+        st.error("Tente novamente!") ```
 
-Análise do Projeto
+### Análise do Projeto
 
 Este projeto demonstra a aplicação prática de redes neurais convolucionais para a classificação de imagens, um campo de grande relevância em inteligência artificial. A implementação fornece uma interface interativa que não só permite a identificação de personagens, mas também envolve os usuários de forma lúdica, como demonstrado pelo efeito de confete e pelo painel de contagem de acertos.
 
-Potenciais Usos do Código
+### Potenciais Usos do Código
 
 	1.	Educação: O modelo pode ser utilizado em ambientes educacionais para ensinar conceitos de machine learning e inteligência artificial, facilitando a compreensão de como as CNNs funcionam.
 	2.	Jogos: A lógica de classificação pode ser adaptada para jogos que requerem identificação de personagens ou objetos em imagens, aumentando a interatividade e o engajamento.
