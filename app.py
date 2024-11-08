@@ -3,7 +3,6 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
 import gdown
-import os
 
 # ID do arquivo do modelo no Google Drive
 file_id = '1jJ77L4X6YGlLfFYgvaOWxSBHeWqrcOJ7'  # Substitua pelo seu FILE_ID
@@ -26,11 +25,11 @@ def predict_character(image_path):
 
 # Mapeando os personagens
 characters = {
-    'Homer': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Homer.jpg',
-    'Marge': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Margie.jpg',
-    'Bart': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Bart.jpg',
-    'Lisa': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Lisa.jpg',
-    'Maggie': '/Users/alansms/PycharmProjects/Fiap/MACHINE LEARNING/5ºCheckPoint_Redes_Neurais/Maggie.jpg'
+    'Homer': 'Homer.jpg',
+    'Marge': 'Margie.jpg',
+    'Bart': 'Bart.jpg',
+    'Lisa': 'Lisa.jpg',
+    'Maggie': 'Maggie.jpg'
 }
 
 # Configuração da interface
@@ -76,7 +75,7 @@ for i, (name, image_file) in enumerate(characters.items()):
 
             if selected_character.lower() == name.lower():
                 st.success("Você acertou!", icon="✅")
-                # Chamar função de confete usando o método adequado
+                # Chamar função de confete
                 st.markdown('<script>fireConfetti();</script>', unsafe_allow_html=True)
             else:
                 st.error("Tente novamente!", icon="❌")
