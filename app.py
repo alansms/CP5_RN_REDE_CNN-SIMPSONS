@@ -26,7 +26,8 @@ model = load_model(model_path)
 
 # Função para prever o personagem
 def predict_character(image):
-    img = image.resize((64, 64))  # Redimensiona para o tamanho esperado
+    img = image.convert("RGB")  # Converte a imagem para RGB
+    img = img.resize((64, 64))  # Redimensiona para o tamanho esperado
     img_array = np.array(img) / 255.0  # Normaliza
     img_array = np.expand_dims(img_array, axis=0)  # Adiciona dimensão
     prediction = model.predict(img_array)
@@ -68,7 +69,6 @@ for i, (name, image_file) in enumerate(characters.items()):
             if selected_character.lower() == name.lower():  # Verifica se a previsão está correta
                 st.success("Você acertou!", icon="✅")
                 st.session_state.correct_counts[name] += 1  # Incrementa a contagem de acertos
-                st.markdown('<script>fireConfetti();</script>', unsafe_allow_html=True)
             else:
                 st.error("Tente novamente!", icon="❌")
 
