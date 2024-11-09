@@ -3,6 +3,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image
 import requests
+import time
 
 # ID do arquivo do modelo no Google Drive
 file_id = '1jJ77L4X6YGlLfFYgvaOWxSBHeWqrcOJ7'
@@ -30,8 +31,10 @@ def predict_character(image):
     img = img.resize((64, 64))  # Redimensiona para o tamanho esperado
     img_array = np.array(img) / 255.0  # Normaliza
     img_array = np.expand_dims(img_array, axis=0)  # Adiciona dimensão
+    start_time = time.time()  # Marca o tempo de início da previsão
     prediction = model.predict(img_array)
-    return np.argmax(prediction)
+    processing_time = time.time() - start_time  # Calcula o tempo de processamento
+    return np.argmax(prediction), processing_time
 
 # Mapeando os personagens com links brutos
 characters = {
@@ -66,7 +69,7 @@ for i, (name, image_file) in enumerate(characters.items()):
         # Cria um botão que ativa o efeito de clique ao clicar na imagem
         if st.button(f'Selecionar {name}', key=name):  # Botão para selecionar o personagem
             # Prever o personagem
-            predicted_class = predict_character(img)  # Chama a função com a imagem
+            predicted_class, processing_time = predict_character(img)  # Chama a função com a imagem
 
             # Incrementar tentativas totais
             st.session_state.total_attempts += 1
@@ -76,6 +79,9 @@ for i, (name, image_file) in enumerate(characters.items()):
                 st.session_state.correct_counts[name] += 1  # Incrementa a contagem de acertos
             else:
                 st.error("Tente novamente!", icon="❌")
+
+            # Mostrar o tempo de processamento
+            st.sidebar.markdown(f"**Tempo de Processamento:** {processing_time:.4f} segundos")
 
 # Exibir contadores de acertos na lateral direita
 st.sidebar.header("Contagem de Acertos")
