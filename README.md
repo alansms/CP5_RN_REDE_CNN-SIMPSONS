@@ -2,7 +2,6 @@
 
 Este projeto utiliza redes neurais convolucionais (CNN) para a classificação de imagens dos personagens Homer e Bart do desenho animado *Os Simpsons*. O objetivo é treinar um modelo capaz de identificar corretamente os personagens em imagens e marcar o local onde eles são encontrados com um retângulo ao redor.
 
-!prints00001.png
 
 ### Destaques do Projeto
 
