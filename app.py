@@ -45,6 +45,8 @@ characters = {
 # Inicializando o contador de acertos na sessão
 if 'correct_counts' not in st.session_state:
     st.session_state.correct_counts = {name: 0 for name in characters.keys()}
+if 'total_attempts' not in st.session_state:
+    st.session_state.total_attempts = 0
 
 # Configuração da interface
 st.markdown("<h1 style='text-align: center; color: #FFCC00; font-family: Comic Sans MS;'>CLASSIFICADOR DE PERSONAGENS</h1>", unsafe_allow_html=True)
@@ -66,6 +68,9 @@ for i, (name, image_file) in enumerate(characters.items()):
             # Prever o personagem
             predicted_class = predict_character(img)  # Chama a função com a imagem
 
+            # Incrementar tentativas totais
+            st.session_state.total_attempts += 1
+
             if selected_character.lower() == name.lower():  # Verifica se a previsão está correta
                 st.success("Você acertou!", icon="✅")
                 st.session_state.correct_counts[name] += 1  # Incrementa a contagem de acertos
@@ -76,3 +81,11 @@ for i, (name, image_file) in enumerate(characters.items()):
 st.sidebar.header("Contagem de Acertos")
 for name, count in st.session_state.correct_counts.items():
     st.sidebar.write(f"{name}: {count} vez(es)")
+
+# Calcular percentual de acerto
+if st.session_state.total_attempts > 0:
+    total_correct = sum(st.session_state.correct_counts.values())
+    accuracy_percentage = (total_correct / st.session_state.total_attempts) * 100
+    st.sidebar.markdown(f"**Percentual de Acertos:** {accuracy_percentage:.2f}%")
+else:
+    st.sidebar.write("Ainda não houve tentativas.")
