@@ -81,7 +81,7 @@ for i, (name, image_file) in enumerate(characters.items()):
                 st.error("Tente novamente!", icon="❌")
 
             # Mostrar o tempo de processamento
-            st.sidebar.markdown(f"**Tempo de Processamento:** {processing_time:.4f} segundos")
+            st.sidebar.markdown(f"<h2 style='color: red;'>**TEMPO DE PROCESSAMENTO:** {processing_time:.4f} SEGUNDOS</h2>", unsafe_allow_html=True)
 
 # Exibir contadores de acertos na lateral direita
 st.sidebar.header("Contagem de Acertos")
@@ -92,6 +92,6 @@ for name, count in st.session_state.correct_counts.items():
 if st.session_state.total_attempts > 0:
     total_correct = sum(st.session_state.correct_counts.values())
     accuracy_percentage = (total_correct / st.session_state.total_attempts) * 100
-    st.sidebar.markdown(f"**Percentual de Acertos:** {accuracy_percentage:.2f}%")
+    st.sidebar.markdown(f"<h2 style='color: green;'>**PERCENTUAL DE ACERTOS:** {accuracy_percentage:.2f}%</h2>", unsafe_allow_html=True)
 else:
     st.sidebar.write("Ainda não houve tentativas.")
